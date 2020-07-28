@@ -12599,6 +12599,10 @@ tr {
   margin: 1rem 0 !important;
 }
 
+tr {
+  margin-bottom: 12px;
+}
+
 td {
   padding: 0.95rem 1.5rem;
 }
