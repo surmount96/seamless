@@ -17,19 +17,27 @@ class EmployeeController extends Controller
         $employees = Employee::paginate(7);
         return [
             'status'=>200,
-            'data' => $employees
+            'employees' => $employees
         ];
     }
 
 
     public function store(Request $request)
     {
-        //
+        Employee::create($request->all());
+        return [
+            'status' => 200,
+            'message' => 'Successfully created'
+        ];
     }
 
     public function update(Request $request, $id)
     {
-        //
+        Employee::findOrFail($id)->update($request->all());
+        return [
+            'status' => 200,
+            'message' => 'Successfully updated'
+        ];
     }
 
     /**
@@ -43,7 +51,7 @@ class EmployeeController extends Controller
         Employee::findOrFail($id)->delete();
         return [
             'status' => 200,
-            'message' => 'Successfully updated'
+            'message' => 'Successfully deleted'
         ];
     }
 }

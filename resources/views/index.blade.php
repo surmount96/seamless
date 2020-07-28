@@ -5,7 +5,7 @@
 @section('content')
     <div class="lg:w-11/12 md:w-11/12 mx-auto flex flex-wrap">
         <div class="lg:w-3/12 md:w-4/12 lg:mx-0 md:mx-0 w-full mb-4">
-            <h3 class="text-large font-bold my-4 pl-5">employee</h3>
+            <h3 class="text-large font-bold py-4 bg-white opacity-30 pl-5">employee</h3>
             <div class="w-full bg-white shadow rounded lg:p-10 p-5 ">
                 <div class="">
                     <div class="flex items-center">
@@ -54,13 +54,13 @@
         </div>
         <div class="lg:w-9/12 md:w-8/12 lg:mx-0 sm:mx-0 mx-1 w-full">
             <div class="text-right mb-3">
-                <button class="bg-green py-2 rounded-full text-white px-8 focus:outline-none" @click="addEmployee">add employee</button>
+                <button class="bg-green py-2 rounded-full text-white px-8 focus:outline-none" @click="changeState">add employee</button>
             </div>
             <div class="w-full lg:mx-10 md:mx-5">
                 <div class="w-full text-medium">
                     <div class="flex justify-between py-3 px-10">
                         <p>
-                            <input type="checkbox">
+                            <input type="checkbox" v-model="checkAll">
                         </p>
                         <p class="w-32 ">EMPLOYEE</p>
                         <p class="flex items-center">
@@ -75,199 +75,34 @@
                         </p>
                         <p>MANAGE</p>
                     </div>
-                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10">
+                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10" v-for="(employee,index) in employees" :key="employee.id">
                         <div class="mb-4">
-                            <input type="checkbox">
+                            <input type="checkbox" :checked="checkAll">
                         </div>
                         <div class="flex ">
                             <div class="">
-                                <img src="{{ asset('img/small-img.png') }}" alt="">
+                                <img src="{{ asset('img/small-img-201.png') }}" alt="">
                             </div>
                             <div class="ml-3">
-                                <h2>Ronny Asmo</h2>
-                                <p class="text-gray-grayer ">Software engineer</p>
+                                <h2>@{{ employee.full_name }}</h2>
+                                <p class="text-gray-grayer ">@{{ employee.job_title }}</p>
                             </div>
                         </div>
                         <div>
-                            <h2>3.200 NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
-                            <p>full time</p>
+                            <h2>@{{ employee.salary }} NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
+                            <p>@{{ employee.employment_status }}</p>
                         </div>
                         <div>
-                            <h2>test period</h2>
+                            <h2>@{{ employee.appointment }}</h2>
                             <p>2 months</p>
                         </div>
                         <div class="flex text-gray-grayer">
-                            <div class="hover:text-blue">
+                            <div class="hover:text-blue" @click="editEmployee(employee)">
                                 <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                             </div>
 
                             <div class="border-r"></div>
-                            <div class="hover:text-red">
-                                <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10">
-                        <div class="mb-4">
-                            <input type="checkbox">
-                        </div>
-                        <div class="flex ">
-                            <div class="">
-                                <img src="{{ asset('img/small-img-3.png') }}" alt="">
-                            </div>
-                            <div class="ml-3">
-                                <h2>Ronny Asmo</h2>
-                                <p class="text-gray-grayer ">Software engineer</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h2>3.200 NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
-                            <p>full time</p>
-                        </div>
-                        <div>
-                            <h2>test period</h2>
-                            <p>2 months</p>
-                        </div>
-                        <div class="flex text-gray-grayer">
-                            <div class="hover:text-blue">
-                                <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                            </div>
-
-                            <div class="border-r"></div>
-                            <div class="hover:text-red">
-                                <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10">
-                        <div class="mb-4">
-                            <input type="checkbox">
-                        </div>
-                        <div class="flex ">
-                            <div class="">
-                                <img src="{{ asset('img/small-img-4.png') }}" alt="">
-                            </div>
-                            <div class="ml-3">
-                                <h2>Ronny Asmo</h2>
-                                <p class="text-gray-grayer ">Software engineer</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h2>3.200 NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
-                            <p>full time</p>
-                        </div>
-                        <div>
-                            <h2>test period</h2>
-                            <p>2 months</p>
-                        </div>
-                        <div class="flex text-gray-grayer">
-                            <div class="hover:text-blue">
-                                <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                            </div>
-
-                            <div class="border-r"></div>
-                            <div class="hover:text-red">
-                                <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10">
-                        <div class="mb-4">
-                            <input type="checkbox">
-                        </div>
-                        <div class="flex ">
-                            <div class="">
-                                <img src="{{ asset('img/small-img-5.png') }}" alt="">
-                            </div>
-                            <div class="ml-3">
-                                <h2>Ronny Asmo</h2>
-                                <p class="text-gray-grayer ">Software engineer</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h2>3.200 NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
-                            <p>full time</p>
-                        </div>
-                        <div>
-                            <h2>test period</h2>
-                            <p>2 months</p>
-                        </div>
-                        <div class="flex text-gray-grayer">
-                            <div class="hover:text-blue">
-                                <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                            </div>
-
-                            <div class="border-r"></div>
-                            <div class="hover:text-red">
-                                <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10">
-                        <div class="mb-4">
-                            <input type="checkbox">
-                        </div>
-                        <div class="flex ">
-                            <div class="">
-                                <img src="{{ asset('img/small-img-6.png') }}" alt="">
-                            </div>
-                            <div class="ml-3">
-                                <h2>Ronny Asmo</h2>
-                                <p class="text-gray-grayer ">Software engineer</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h2>3.200 NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
-                            <p>full time</p>
-                        </div>
-                        <div>
-                            <h2>test period</h2>
-                            <p>2 months</p>
-                        </div>
-                        <div class="flex text-gray-grayer">
-                            <div class="hover:text-blue">
-                                <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                            </div>
-
-                            <div class="border-r"></div>
-                            <div class="hover:text-red">
-                                <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10">
-                        <div class="mb-4">
-                            <input type="checkbox">
-                        </div>
-                        <div class="flex ">
-                            <div class="">
-                                <img src="{{ asset('img/small-img-7.png') }}" alt="">
-                            </div>
-                            <div class="ml-3">
-                                <h2>Ronny Asmo</h2>
-                                <p class="text-gray-grayer ">Software engineer</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h2>3.200 NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
-                            <p>full time</p>
-                        </div>
-                        <div>
-                            <h2>test period</h2>
-                            <p>2 months</p>
-                        </div>
-                        <div class="flex text-gray-grayer">
-                            <div class="hover:text-blue">
-                                <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                            </div>
-
-                            <div class="border-r"></div>
-                            <div class="hover:text-red">
+                            <div class="hover:text-red" @click="deleteEmployee(employee.id)">
                                 <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </div>
 
@@ -280,66 +115,66 @@
     </div>
 
 {{--    Modal--}}
-    <vodal :show="show" :width="500" :height="540" animation="slideRight" @hide="show = false">
+    <vodal :show="show" :width="500" :height="560" animation="slideRight" @hide="show = false">
         <div class="border-b border-gray pb-3">
-            <h2>Add new employee</h2>
+            <h2>@{{ state ? 'Update' : 'Add new' }} employee</h2>
         </div>
-        <form>
+        <form @submit.prevent="state ? updateEmployee() : addEmployee()">
             <div class="my-3 mx-3 text-medium text-gray-grayer">
                 <label for="" class="ml-">Full name</label>
-                <input type="text" class="w-full  border  py-2 px-3 focus:outline-none rounded" required placeholder="full name">
+                <input type="text" v-model="form.full_name" class="w-full  border  py-2 px-3 focus:outline-none rounded" required placeholder="full name">
             </div>
             <div class="my-3 mx-3 text-medium text-gray-grayer">
                 <label for="" class="ml-">Job title</label>
-                <input type="text" class="w-full  border  py-2 px-3 focus:outline-none rounded" required placeholder="job title">
+                <input type="text" v-model="form.job_title" class="w-full  border  py-2 px-3 focus:outline-none rounded" required placeholder="job title">
             </div>
             <div class="flex flex-wrap my-3 mx-3 text-medium text-gray-grayer">
                 <div class="lg:w-1/2 md:w-1/2 w-full">
                     <div class="lg:mr-2 md:mr-2 ">
                         <label for="" class="ml-">Employment Status</label>
-                        <select class="w-full  border  bg-white py-2 px-3 focus:outline-none rounded">
-                            <option value="">Full Time</option>
-                            <option value="">Part Time</option>
+                        <select v-model="form.employment_status" class="w-full border  bg-white py-2 px-3 focus:outline-none rounded">
+                            <option value="Full Time">Full Time</option>
+                            <option value="Part Time">Part Time</option>
                         </select>
                     </div>
 
                 </div>
                 <div class="lg:w-1/2 md:w-1/2 w-full">
                     <label for="" class="ml-">Appointment</label>
-                    <select class="w-full block border bg-white py-2 px-3 focus:outline-none rounded">
-                        <option value="">test period</option>
-                        <option value="">contract</option>
-                        <option value="">probation</option>
+                    <select v-model="form.appointment" class="w-full block border bg-white py-2 px-3 focus:outline-none rounded">
+                        <option value="test period">test period</option>
+                        <option value="contract">contract</option>
+                        <option value="probation">probation</option>
                     </select>
                 </div>
             </div>
             <div class="my-3 mx-3 text-medium text-gray-grayer flex">
                 <div class="mr-2">
                     <label for="" class="ml-">Start duration</label>
-                    <datetime v-model="date" input-class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="choose a start date" style="width:13.4rem"></datetime>
+                    <datetime v-model="form.start" input-class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="choose a start date" style="width:13.4rem"></datetime>
                 </div>
                 <div class="">
                     <label for="" class="ml-">End duration</label>
-                    <datetime v-model="date" input-class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="choose an end date" style="width:14rem"></datetime>
+                    <datetime v-model="form.end" input-class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="choose an end date" style="width:14rem"></datetime>
                 </div>
             </div>
             <div class="my-3 mx-3 text-medium text-gray-grayer flex">
                 <div class="mr-2">
                     <label for="" class="ml-">Increase</label>
-                    <input type="number" class="w-full  border  py-2 px-3 focus:outline-none rounded"  placeholder="salary increase">
+                    <input type="number" v-model="form.increase" class="w-full  border  py-2 px-3 focus:outline-none rounded"  placeholder="salary increase">
                 </div>
                 <div class="">
                     <label for="" class="ml-">Deduction</label>
-                    <input type="number" class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="salary decrease">
+                    <input type="number" v-model="form.decrease" class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="salary decrease">
                 </div>
             </div>
             <div class="my-3 mx-3 text-medium text-gray-grayer">
                 <label for="" class="ml-">Salary</label>
-                <input type="number" class="w-full  border  py-2 px-3 focus:outline-none rounded" required placeholder="salary">
+                <input type="number" v-model="form.salary" class="w-full  border  py-2 px-3 focus:outline-none rounded" required placeholder="salary">
             </div>
 
             <div class="text-right mr-3">
-                <button type="submit" class="bg-green py-2 w-32 text-white rounded-full">create</button>
+                <button type="submit" class="bg-green py-2 w-32 text-white rounded-full">@{{ state ? 'update' : 'create' }}</button>
             </div>
         </form>
     </vodal>

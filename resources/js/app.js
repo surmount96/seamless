@@ -15,10 +15,10 @@ import "vodal/common.css";
 import "vodal/rotate.css";
 import 'vue-datetime/dist/vue-datetime.css'
 
-import { Form, HasError, AlertError } from 'vform'
+import Form  from 'vform'
 
-Vue.component(HasError.name, HasError);
-Vue.component(AlertError.name, AlertError);
+// Vue.component(HasError.name, HasError);
+// Vue.component(AlertError.name, AlertError);
 Vue.component('datetime', Datetime);
 Vue.component(Vodal.name, Vodal);
 /**
@@ -45,12 +45,58 @@ const app = new Vue({
     data() {
         return {
             show:false,
-            date:'choose a state date'
+            employees:{},
+            state: false,
+            checkAll:false,
+            form: new Form({
+                id:'',
+                full_name:'',
+                job_title: '',
+                salary:'',
+                employment_status:'',
+                decrease:'',
+                increase:'',
+                end:'',
+                start:'',
+                appointment:''
+            })
         }
     },
+    mounted(){
+        this.getEmployees();
+    },
     methods:{
+        async getEmployees(){
+           const response = await axios.get('/api/employee');
+           this.employees = response.data.employees.data;
+        },
+        makePagination(){
+
+        },
+        changeState(){
+            this.state = false;
+            this.show = true;
+            this.form.reset();
+        },
         addEmployee(){
             this.show = true;
+            this.form.post('/api/employee').then(res => console.log(res))
+            this.form.reset();
+            this.getEmployees();
+        },
+        editEmployee(data){
+          this.show = true;
+          this.form.fill(data);
+          this.state = true;
+        },
+        updateEmployee(){
+            this.form.patch('/api/employee/'+this.form.id)
+                .then(res => { this.getEmployees()})
+                .catch(err => { console.log(err.response)});
+        },
+        deleteEmployee(id){
+            this.form.delete('/api/employee/'+id).then(res => {})
+                .catch(err => console.log(err.response));
         }
     }
 });

@@ -16,6 +16,6 @@ class Employee extends Model
         'end',
         'profile_pic',
         'appointment',
-        'status'
+        'employment_status'
     ];
 }
