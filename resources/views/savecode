@@ -1,0 +1,119 @@
+            <div class="w-full lg:mx-10 md:mx-5">
+                <div class="w-full text-medium">
+{{--                    <div class="flex justify-between py-3 px-10">--}}
+{{--                        <p>--}}
+{{--                            <input type="checkbox" v-model="checkAll">--}}
+{{--                        </p>--}}
+{{--                        <p class="w-32 ">EMPLOYEE</p>--}}
+{{--                        <p class="flex items-center">--}}
+{{--                            <span class="mr-2">--}}
+{{--                                SALARY--}}
+{{--                            </span>--}}
+{{--                            <svg class="w-3 text-gray-grayer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 7l4-4m0 0l4 4m-4-4v18"></path></svg>--}}
+{{--                        </p>--}}
+{{--                        <p class="flex items-center">--}}
+{{--                            <span class="mr-">STATUS</span>--}}
+{{--                            <svg  class="w-3 text-gray-grayer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M16 17l-4 4m0 0l-4-4m4 4V3"></path></svg>--}}
+{{--                        </p>--}}
+{{--                        <p>MANAGE</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="" v-show="loading">--}}
+{{--                        <img src="{{ asset('img/loader.gif') }}" class="w-6 mx-auto" alt="">--}}
+{{--                    </div>--}}
+{{--                    <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10" v-for="(employee,index) in employees" :key="employee.id">--}}
+{{--                        <div class="mb-4">--}}
+{{--                            <input type="checkbox" :checked="checkAll">--}}
+{{--                        </div>--}}
+{{--                        <div class="flex ">--}}
+{{--                            <div class="">--}}
+{{--                                <img src="{{ asset('img/small-img-201.png') }}" alt="">--}}
+{{--                            </div>--}}
+{{--                            <div class="ml-3">--}}
+{{--                                <h2>@{{ employee.full_name }}</h2>--}}
+{{--                                <p class="text-gray-grayer ">@{{ employee.job_title }}</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <h2>@{{ employee.salary }} NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>--}}
+{{--                            <p>@{{ employee.employment_status }}</p>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <h2>@{{ employee.appointment }}</h2>--}}
+{{--                            <p>2 months</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="flex text-gray-grayer">--}}
+{{--                            <div class="hover:text-blue" @click="editEmployee(employee)">--}}
+{{--                                <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>--}}
+{{--                            </div>--}}
+
+{{--                            <div class="border-r"></div>--}}
+{{--                            <div class="hover:text-red" @click="deleteEmployee(employee.id)">--}}
+{{--                                <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>--}}
+{{--                            </div>--}}
+
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="w-full mx-8 my-4">
+                <tr>
+                    <td><input type="checkbox" v-model="checkAll"></td>
+                    <td>EMPLOYEE</td>
+                    <td class="flex items-center">
+                        <span class="mr-2">
+                                SALARY
+                            </span>
+                        <svg class="w-3 text-gray-grayer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 7l4-4m0 0l4 4m-4-4v18"></path></svg>
+                    </td>
+                    <td>
+                        <span class="mr-">STATUS</span>
+                    </td>
+                    <td>MANAGE</td>
+                </tr>
+                <tr class="bg-white shadow rounded mb-4 py-3 text-medium" v-for="(employee,index) in employees" :key="employee.id">
+                    <td><input type="checkbox" :checked="checkAll"></td>
+                    <td class="flex">
+                        <div class="">
+                            <img src="{{ asset('img/small-img-201.png') }}" alt="">
+                        </div>
+                        <div class="ml-3">
+                            <h2>@{{ employee.full_name }}</h2>
+                            <p class="text-gray-grayer ">@{{ employee.job_title }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="">
+                            <h2>@{{ employee.salary }} NOK <small class="bg-green py-1 px-2 text-white rounded-full text-subtext">+300</small></h2>
+                            <p>@{{ employee.employment_status }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <h2>@{{ employee.appointment }}</h2>
+                        <p>2 months</p>
+                    </td>
+                    <td class="flex text-gray-grayer">
+                        <div class="hover:text-blue" @click="editEmployee(employee)">
+                            <svg class="w-4 mr-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                        </div>
+
+                        <div class="border-r"></div>
+                        <div class="hover:text-red" @click="deleteEmployee(employee.id)">
+                            <svg class="w-4 ml-4 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
