@@ -75,6 +75,9 @@
                         </p>
                         <p>MANAGE</p>
                     </div>
+                    <div class="" v-show="loading">
+                        <img src="{{ asset('img/loader.gif') }}" class="w-6 mx-auto" alt="">
+                    </div>
                     <div class="bg-white shadow rounded mb-4 flex justify-between items-center py-3 px-10" v-for="(employee,index) in employees" :key="employee.id">
                         <div class="mb-4">
                             <input type="checkbox" :checked="checkAll">

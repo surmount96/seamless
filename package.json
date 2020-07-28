@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "luxon": "^1.24.1",
+        "sweetalert2": "^9.17.1",
         "tailwindcss": "^1.5.2",
         "vform": "^1.0.1",
         "vodal": "^2.4.0",

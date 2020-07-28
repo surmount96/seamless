@@ -9,11 +9,13 @@ require('./bootstrap');
 window.Vue = require('vue');
 import Vodal from 'vodal';
 import { Datetime } from 'vue-datetime';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 
 import "vodal/common.css";
 import "vodal/rotate.css";
 import 'vue-datetime/dist/vue-datetime.css'
+import 'sweetalert2/src/sweetalert2.scss'
 
 import Form  from 'vform'
 
@@ -48,6 +50,7 @@ const app = new Vue({
             employees:{},
             state: false,
             checkAll:false,
+            loading:false,
             form: new Form({
                 id:'',
                 full_name:'',
@@ -67,8 +70,10 @@ const app = new Vue({
     },
     methods:{
         getEmployees(){
+            this.loading = true;
             axios.get('/api/employee').then( response => {
                 this.employees = response.data.employees.data;
+                this.loading = false;
             });
 
         },
@@ -82,9 +87,14 @@ const app = new Vue({
         },
         addEmployee(){
             this.show = true;
-            this.form.post('/api/employee').then(res => console.log(res));
-            this.form.reset();
-            this.getEmployees();
+            this.loading = true;
+            this.form.post('/api/employee').then(res => {
+                this.form.reset();
+                this.getEmployees();
+                this.loading = false;
+                this.show = false;
+                Swal.fire('Successful', 'New employee added', 'success')
+            }).catch(err => {console.log(err)});
         },
         editEmployee(data){
           this.show = true;
@@ -92,13 +102,41 @@ const app = new Vue({
           this.state = true;
         },
         updateEmployee(){
+            this.loading = true;
             this.form.patch('/api/employee/'+this.form.id)
-                .then(res => { this.getEmployees()})
+                .then(res => {
+                    this.getEmployees(); this.loading = false; this.show = false;
+                    Swal.fire('Successful', 'Employee data updated', 'success')
+                })
                 .catch(err => { console.log(err.response)});
         },
         deleteEmployee(id){
-            this.form.delete('/api/employee/'+id).then(res => {})
-                .catch(err => console.log(err.response));
+            this.loading = true;
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this imaginary file!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.value) {
+                    this.form.delete('/api/employee/'+id).then(res => {
+                        this.getEmployees(); this.loading = false;
+                    }).catch(err => console.log(err.response));
+                    Swal.fire(
+                        'Deleted!',
+                        'Your imaginary file has been deleted.',
+                        'success'
+                    )
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    )
+                }
+            });
         }
     }
 });
