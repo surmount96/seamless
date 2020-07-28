@@ -1,4 +1,4 @@
-# Laravel + VueJs
+# Laravel + VueJs + Tailwind
 
 # Getting Started
 Clone the project repository by running the command below if you use SSH
