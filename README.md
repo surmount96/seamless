@@ -17,8 +17,8 @@ Then run:
 php artisan key:generate
 
 ####Database Migrations
-<p>Be sure to fill in your database details in your .env file before running the migrations e.g DB_CONNECTION=sqlite :</p>
-Then run: php artisan migrate
+<p>Be sure to fill in your database details in your .env file before running the migrations.</p>
+<p>Then run: php artisan migrate</p>
 ####To generate quick data into the DB run:
 php artisan tinker
 Then, factory(App\Employee::class,10)->create();
