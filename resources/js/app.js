@@ -8,13 +8,18 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import Vodal from 'vodal';
+import { Datetime } from 'vue-datetime';
+
 
 import "vodal/common.css";
 import "vodal/rotate.css";
+import 'vue-datetime/dist/vue-datetime.css'
+
 import { Form, HasError, AlertError } from 'vform'
 
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
+Vue.component('datetime', Datetime);
 Vue.component(Vodal.name, Vodal);
 /**
  * The following block of code may be used to automatically register your
@@ -39,7 +44,8 @@ const app = new Vue({
     el: '#app',
     data() {
         return {
-            show:false
+            show:false,
+            date:'choose a state date'
         }
     },
     methods:{

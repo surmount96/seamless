@@ -316,11 +316,11 @@
             <div class="my-3 mx-3 text-medium text-gray-grayer flex">
                 <div class="mr-2">
                     <label for="" class="ml-">Start duration</label>
-                    <input type="number" class="w-full  border  py-2 px-3 focus:outline-none rounded"  placeholder="salary">
+                    <datetime v-model="date" input-class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="choose a start date" style="width:13.4rem"></datetime>
                 </div>
                 <div class="">
                     <label for="" class="ml-">End duration</label>
-                    <input type="number" class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="salary">
+                    <datetime v-model="date" input-class="w-full  border  py-2 px-3 focus:outline-none rounded" placeholder="choose an end date" style="width:14rem"></datetime>
                 </div>
             </div>
             <div class="my-3 mx-3 text-medium text-gray-grayer flex">
