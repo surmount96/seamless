@@ -1,6 +1,6 @@
 # Laravel + VueJs + Tailwind
 
-# Getting Started
+### Getting Started
 Clone the project repository by running the command below if you use SSH
 <li>git clone git@github.com:surmount96/seamless.git</li>
 <br>
