@@ -20,7 +20,7 @@ php artisan key:generate
 <p>Be sure to fill in your database details in your .env file before running the migrations.</p>
 <p>Then run: php artisan migrate</p>
 ####To generate quick data into the DB run:
-php artisan tinker
+<p>php artisan tinker</p>
 Then, factory(App\Employee::class,10)->create();
 exit
 
