@@ -111,7 +111,7 @@ const app = new Vue({
                 .catch(err => { console.log(err.response)});
         },
         deleteEmployee(id){
-            this.loading = true;
+            // this.loading = true;
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You will not be able to recover this imaginary file!',
@@ -132,7 +132,7 @@ const app = new Vue({
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire(
                         'Cancelled',
-                        'Your imaginary file is safe :)',
+                        'Your data is safe :)',
                         'error'
                     )
                 }

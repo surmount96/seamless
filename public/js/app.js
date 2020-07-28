@@ -64499,7 +64499,7 @@ var app = new Vue({
     deleteEmployee: function deleteEmployee(id) {
       var _this4 = this;
 
-      this.loading = true;
+      // this.loading = true;
       sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_2___default.a.fire({
         title: 'Are you sure?',
         text: 'You will not be able to recover this imaginary file!',
@@ -64519,7 +64519,7 @@ var app = new Vue({
 
           sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_2___default.a.fire('Deleted!', 'Your imaginary file has been deleted.', 'success');
         } else if (result.dismiss === sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_2___default.a.DismissReason.cancel) {
-          sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_2___default.a.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
+          sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_2___default.a.fire('Cancelled', 'Your data is safe :)', 'error');
         }
       });
     }
