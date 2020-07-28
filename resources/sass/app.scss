@@ -1,0 +1,15 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap');
+body{
+    font-family: 'Mulish', sans-serif;
+}
+tr{
+    margin:1rem 0!important;
+}
+td{
+    padding: .95rem 1.5rem;
+}
