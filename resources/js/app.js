@@ -51,6 +51,10 @@ const app = new Vue({
             state: false,
             checkAll:false,
             loading:false,
+            current_page:'',
+            last_page:'',
+            prev_page:'',
+            next_page:'',
             form: new Form({
                 id:'',
                 full_name:'',
@@ -69,16 +73,20 @@ const app = new Vue({
         this.getEmployees();
     },
     methods:{
-        getEmployees(){
+        getEmployees(page = 1){
             this.loading = true;
-            axios.get('/api/employee').then( response => {
+            axios.get('/api/employee?page='+page).then( response => {
                 this.employees = response.data.employees.data;
+                this.makePagination(response.data.employees);
                 this.loading = false;
             });
 
         },
-        makePagination(){
-
+        makePagination(data){
+            this.current_page = data.current_page;
+            this.last_page = data.last_page;
+            this.prev_page = data.prev_page_url;
+            this.next_page = data.next_page_url;
         },
         changeState(){
             this.state = false;

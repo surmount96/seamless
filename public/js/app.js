@@ -64427,6 +64427,10 @@ var app = new Vue({
       state: false,
       checkAll: false,
       loading: false,
+      current_page: '',
+      last_page: '',
+      prev_page: '',
+      next_page: '',
       form: new vform__WEBPACK_IMPORTED_MODULE_7___default.a({
         id: '',
         full_name: '',
@@ -64448,13 +64452,22 @@ var app = new Vue({
     getEmployees: function getEmployees() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.loading = true;
-      axios.get('/api/employee').then(function (response) {
+      axios.get('/api/employee?page=' + page).then(function (response) {
         _this.employees = response.data.employees.data;
+
+        _this.makePagination(response.data.employees);
+
         _this.loading = false;
       });
     },
-    makePagination: function makePagination() {},
+    makePagination: function makePagination(data) {
+      this.current_page = data.current_page;
+      this.last_page = data.last_page;
+      this.prev_page = data.prev_page_url;
+      this.next_page = data.next_page_url;
+    },
     changeState: function changeState() {
       this.state = false;
       this.show = true;

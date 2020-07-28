@@ -111,7 +111,21 @@
 
                         </div>
                     </div>
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between text-medium">
+                        <div class="">
+                            <p class=" text-gray-700" style="font-size:.8rem">
+                                Showing
+                                <span class="font-medium">@{{ current_page}}</span>
+                                of
+                                <span class="font-medium">@{{ last_page }}</span>
+                            </p>
+                        </div>
+                        <div class="">
+                            <button class="border border-gray py-1 px-3 shadow" :disabled="!prev_page" @click="getEmployees(current_page-1)">Previous</button>
+                            <button class="border border-gray py-1 px-3 ml-2 shadow" :disabled="!next_page" @click="getEmployees(current_page+1)">Next</button>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
