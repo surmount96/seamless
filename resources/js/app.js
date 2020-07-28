@@ -66,9 +66,11 @@ const app = new Vue({
         this.getEmployees();
     },
     methods:{
-        async getEmployees(){
-           const response = await axios.get('/api/employee');
-           this.employees = response.data.employees.data;
+        getEmployees(){
+            axios.get('/api/employee').then( response => {
+                this.employees = response.data.employees.data;
+            });
+
         },
         makePagination(){
 
@@ -80,7 +82,7 @@ const app = new Vue({
         },
         addEmployee(){
             this.show = true;
-            this.form.post('/api/employee').then(res => console.log(res))
+            this.form.post('/api/employee').then(res => console.log(res));
             this.form.reset();
             this.getEmployees();
         },
