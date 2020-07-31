@@ -34,7 +34,7 @@ Vue.component(Vodal.name, Vodal);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('show', require('./Show.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -105,19 +105,10 @@ const app = new Vue({
             }).catch(err => {console.log(err)});
         },
         editEmployee(data){
-          this.show = true;
-          this.form.fill(data);
-          this.state = true;
+          localStorage.setItem('employee_id',data.id);
+          // this.form.fill(data);
         },
-        updateEmployee(){
-            this.loading = true;
-            this.form.patch('/api/employee/'+this.form.id)
-                .then(res => {
-                    this.getEmployees(); this.loading = false; this.show = false;
-                    Swal.fire('Successful', 'Employee data updated', 'success')
-                })
-                .catch(err => { console.log(err.response)});
-        },
+
         deleteEmployee(id){
             // this.loading = true;
             Swal.fire({

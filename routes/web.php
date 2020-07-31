@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-
+Route::resource('employee','EmployeeController');
 Route::view('/client','client');
 Route::view('/statistics','statistics');
 Route::view('/calendar','calendar');

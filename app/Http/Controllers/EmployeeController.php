@@ -20,7 +20,24 @@ class EmployeeController extends Controller
             'employees' => $employees
         ];
     }
+    public function create()
+    {
+        return view('create');
+    }
 
+    public function edit($id)
+    {
+        $employee = Employee::find($id);
+        return view('show',compact('employee'));
+    }
+
+    public function show($id)
+    {
+        $employee = Employee::find($id);
+        return [
+            'employee' => $employee
+        ];
+    }
 
     public function store(Request $request)
     {
