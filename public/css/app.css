@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap);/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+@import url(https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap);/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
    ========================================================================== */
@@ -12592,7 +12592,7 @@ video {
 }
 
 body {
-  font-family: "Mulish", sans-serif;
+  font-family: "Muli", sans-serif;
 }
 
 tr {
